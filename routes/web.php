@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RentalController;
+use App\Http\Controllers\RentalsController;
 
 
 Route::get('/loginform', [AuthController::class, 'showLoginForm'])->name('showlogin');
@@ -16,7 +16,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('customers', CustomerController::class);
-Route::resource('rentals', RentalController::class);
+Route::resource('rentals', RentalsController::class);
 
 
 Route::get('/admindashboard', function () {

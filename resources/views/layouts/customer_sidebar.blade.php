@@ -37,7 +37,10 @@
                             </a>
                             <ul class="slide-menu child1">
                             <li class="slide">
-                                <a href="#" class="side-menu__item">My Rentals</a>
+                                <a href="{{ route('rentals.index') }}" class="side-menu__item">My Rentals</a>
+                            </li>
+                            <li class="slide">
+                                <a href="{{ route('rentals.create') }}" class="side-menu__item">Add Rentals</a>
                             </li>
                         </ul>
                     </nav>

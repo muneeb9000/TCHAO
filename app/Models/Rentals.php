@@ -12,6 +12,7 @@ class Rentals extends Model
 
     protected $fillable = [
         'publisher_id',
+        'city_id',
         'rental_name',
         'rental_category',
         'pets',
@@ -32,5 +33,9 @@ class Rentals extends Model
     public function publisher()
     {
         return $this->belongsTo(User::class, 'publisher_id');
+    }
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id'); 
     }
 }

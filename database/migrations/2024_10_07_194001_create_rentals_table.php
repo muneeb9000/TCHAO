@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('publisher_id')->constrained('users'); 
+            $table->foreignId('city_id')->constrained('cities');
             $table->string('rental_name');
             $table->enum('rental_category', ['Room', 'Apartment', 'House', 'Other']);
             $table->enum('pets', ['Yes', 'No']);

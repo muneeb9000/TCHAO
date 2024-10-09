@@ -36,205 +36,134 @@
       </div>
     </header>
      <!-- header end -->
-       <!-- home start -->
-    <section id="home" class="home section">
-     <div class="container">
-      <div class="heroWrap">
-        <div class="textWrap">
-           <h1>Partagez une location le temps</h1>
-        <p>
-          Des économies partagées entre particuliers</p>
-        </div>
-      <!-- <div class="imgWrap">
-        <img src="/imgs/hero.png" alt="hero">
-      </div> -->
-     </div>
-     <div class="frame">
-      <div class="textWrap">
-          <h3 >Trouvez maintenant !</h3>
-        <button class="secondary">Je suis flexible</button>
-      </div>
-    
-      <div class="form">
-        <!-- Location Field -->
-        <div class="inputField">
-         <div class="inputWrap"> <label>Ou</label>
-          <input
-            type="text"
-            placeholder="Ville, département, région"
-            class="focus:outline-none"
-          /></div>
-       
-    
-        <!-- Arrival Date -->
-        <div class="inputWrap">
-          <label >Arrivée</label>
-          <input
-            type="date"
-            class="bg-pink-200 p-2 rounded-lg focus:outline-none"
-          />
-        </div>
-    
-        <!-- Departure Date -->
-        <div class="inputWrap">
-          <label >Départ</label>
-          <input
-            type="date"
-            class="bg-pink-200 p-2 rounded-lg focus:outline-none"
-          />
-        </div>
-    
-        <!-- Number of People -->
-        <div class="inputWrap">
-          <label >Personne</label>
-          <input
-            type="number"
-            placeholder="Nombre de personnes"
-            class="bg-pink-200 p-2 rounded-lg focus:outline-none"
-          />
-        </div>
-    
-        <!-- Search Button -->
-        <button class="white">
-          Rechercher
-        </button>
-      </div>
-    </div> 
-    </div>
-  <div class="cards">
+      <!-- home start -->
+<section id="home" class="home section">
     <div class="container">
-     <div class="card">
-       <strong class="title">Rapide</strong>
-      <div class="bar"></div>
-      <p>Simple et rapide, en fonction d'un lieu, d'une date, choisissez  votre location partagée et réservez là !</p>
+        <div class="heroWrap">
+            <div class="textWrap">
+                <h1>Partagez une location le temps</h1>
+                <p>Des économies partagées entre particuliers</p>
+            </div>
+            <!-- <div class="imgWrap">
+                <img src="/imgs/hero.png" alt="hero">
+            </div> -->
+        </div>
+        <div class="frame">
+            <div class="textWrap">
+                <h3>Trouvez maintenant !</h3>
+                <button class="secondary">Je suis flexible</button>
+            </div>
+
+            <div class="form">
+                <!-- Location Field -->
+                <div class="inputField">
+                    <div class="inputWrap">
+                        <label>Ou</label>
+                        <select class="focus:outline-none">
+                            <option value="">Sélectionnez une ville</option>
+                            @foreach($cities as $city) <!-- Assuming $cities is passed from the controller -->
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Arrival Date -->
+                    <div class="inputWrap">
+                        <label>Arrivée</label>
+                        <input type="date" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
+                    </div>
+
+                    <!-- Departure Date -->
+                    <div class="inputWrap">
+                        <label>Départ</label>
+                        <input type="date" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
+                    </div>
+
+                    <!-- Number of People -->
+                    <div class="inputWrap">
+                        <label>Personne</label>
+                        <input type="number" placeholder="Nombre de personnes" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
+                    </div>
+
+                    <!-- Search Button -->
+                    <button class="white">
+                        Rechercher
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="container">
+                <div class="card">
+                    <strong class="title">Rapide</strong>
+                    <div class="bar"></div>
+                    <p>Simple et rapide, en fonction d'un lieu, d'une date, choisissez votre location partagée et réservez là !</p>
+                </div>
+                <div class="card">
+                    <strong class="title">Économique</strong>
+                    <div class="bar"></div>
+                    <p>-50%, -60%, -70%... d'économie partagée pour mieux profiter de votre séjour</p>
+                </div>
+                <div class="card">
+                    <strong class="title">Collaboratif</strong>
+                    <div class="bar"></div>
+                    <p>Les profils sont validés par notre équipe et la communauté. Vous savez ainsi avec qui vous allez cohabiter.</p>
+                </div>
+            </div>
+        </div>
     </div>
-     <div class="card">
-       <strong class="title">Économique</strong>
-      <div class="bar"></div>
-      <p>-50%, -60%, -70%... d'économie partagée
-        pour mieux profiter de votre séjour</p>
+
+    <div class="comment">
+        <div class="container">
+            <div class="bar"></div>
+            <h3>Comment trouver votre location à partager ?</h3>
+            <div class="cardHolder">
+                <div class="card">
+                    <div class="imgWrap">
+                        <img src="/imgs/search.svg" alt="search">
+                        <strong class="title">Recherchez</strong>
+                    </div>
+                    <p>Effectuez une recherche parmi nos annonces disponibles</p>
+                </div>
+                <div class="card">
+                    <div class="imgWrap">
+                        <img src="/imgs/chat.svg" alt="search">
+                        <strong class="title">Discutez</strong>
+                    </div>
+                    <p>Prenez contact avec votre futur colocataire</p>
+                </div>
+                <div class="card">
+                    <div class="imgWrap">
+                        <img src="/imgs/correct.svg" alt="search">
+                        <strong class="title">Validez</strong>
+                    </div>
+                    <p>Conquis par l'annonce ! Réservez votre location</p>
+                </div>
+            </div>
+        </div>
     </div>
-     <div class="card">
-       <strong class="title">Collaboratif</strong>
-      <div class="bar"></div>
-      <p>Les profils sont validés par notre équipe
-        et la communauté.
-        Vous savez ainsi avec qui vous allez cohabiter.</p>
+
+    <div class="blogs">
+        <div class="container">
+            <div class="bar"></div>
+            <h3>Les dernières annonces</h3>
+            <div class="blogWrap">
+                @foreach($rentals as $rental) <!-- Assuming $rentals is passed from the controller -->
+                    <div class="blog">
+                        <img src="{{ asset($rental->rental_property_pictures) }}" alt="card"> <!-- Adjust this path based on your storage setup -->
+                        <div class="text">
+                            <strong class="title">{{ $rental->title }}</strong> <!-- Adjust the property names based on your database -->
+                            <span>À partir de {{ $rental->price }} € / la nuit par personne</span>
+                            <span>{{ $rental->available_places }} places disponibles</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-    </div>
-  </div>
-</div>
-  <div class="comment">
-    <div class="container">
-      <div class="bar"></div>
-      <h3>Comment trouver votre location à partager ?</h3>
-      <div class="cardHolder">
-        <div class="card">
-      <div class="imgWrap">
-        <img src="/imgs/search.svg" alt="search">
-        <strong class="title">Recherchez</strong>
-      </div>
-      <p>Effectuez une recherche
-        parmi nos annonces disponibles</p>
-        </div>
-        <div class="card">
-      <div class="imgWrap">
-        <img src="/imgs/chat.svg" alt="search">
-        <strong class="title">Discutez</strong>
-      </div>
-      <p>Prenez contact
-        avec votre futur colocataire</p>
-        </div>
-        <div class="card">
-      <div class="imgWrap">
-        <img src="/imgs/correct.svg" alt="search">
-        <strong class="title">Validez</strong>
-      </div>
-      <p>Conquis par l'annonce !
-        Réservez votre location</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="blogs">
-    <div class="container">
-      <div class="bar"></div>
-      <h3>Les dernières annonces
-        </h3>
-      <div class="blogWrap">
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-        <div class="blog">
-          <img src="/imgs/card1.jpeg" alt="card">
-          <div class="text">
-            <strong class="title">
-              Bergerac
-            </strong>
-           <span>À partir de 25 € / la nuit par personne</span>
-           <span>4	places disponibles</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</section>
+
   <div class="heroSlider">
     <div class="container">
       <div class="bar"></div>
