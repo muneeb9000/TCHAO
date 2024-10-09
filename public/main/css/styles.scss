@@ -1,0 +1,183 @@
+@import "../layout/mixin";
+@import "../layout/variables";
+@import "../layout/header";
+@import "../layout/footer";
+@import "../layout/home";
+@import "../layout/contact";
+@import "../layout/work";
+@import "../layout/common";
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap");
+html {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px/20px "Catamaran", sans-serif;
+  color: #171717;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  position: relative;
+}
+
+.container {
+  max-width: 1250px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+.h1,
+h1 {
+  font-family: "Cormorant Garamond", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 32px;
+  @media (min-width: 768px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  @media (min-width: 992px) {
+    font-size: 38px;
+    line-height: 42px;
+  }
+}
+.h2,
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  @media (min-width: 992px) {
+    font-size: 30px;
+    line-height: 34px;
+  }
+}
+h3,
+.h3 {
+  font-size: 18px;
+  line-height: 22px;
+  @media (min-width: 992px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+h4,
+.h4 {
+  font-size: 18px;
+  line-height: 22px;
+  @media (min-width: 992px) {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+textarea {
+  resize: vertical;
+  vertical-align: top;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="file"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+button {
+  min-width: 130px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+.btn {
+  color: $white;
+  background-color: $primary;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: $white;
+    border: 1px solid $primary;
+    color: $primary;
+  }
+}
+.secondary {
+  color: $white;
+  background-color: $secondary;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $white;
+    border: 1px solid $secondary;
+    color: $secondary;
+  }
+}
+.white {
+  background: $white;
+  color:$primary;
+  border: 1px solid $white;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color:$primary;
+    color: $white;
+    // border: 1px solid $primary;
+  }
+}
+
+
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
