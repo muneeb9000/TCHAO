@@ -8,6 +8,69 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick-theme.css')}}" />
     <link rel="stylesheet" href="{{ asset('main/css/styles.css')}}" />
+    <style>
+    .custom-field {
+        
+        padding: 0.5rem; /* Tailwind: p-2 */
+        border-radius: 0.5rem; /* Tailwind: rounded-lg */
+        border: 1px solid #e5e7eb; /* Tailwind: border-gray-300 */
+        width: 100%; /* Full width */
+        font-size: 1rem; /* Consistent font size */
+        color: #374151; /* Text color */
+        outline: none; /* Remove default outline */
+        box-shadow: none; /* Remove default box-shadow */
+    }
+
+    .custom-field:focus {
+       
+        box-shadow: 0 0 0 3px rgba(233, 84, 186, 0.3); /* Focus shadow */
+    }
+
+    .custom-field::-webkit-calendar-picker-indicator {
+        filter: invert(35%) sepia(62%) saturate(1548%) hue-rotate(260deg) brightness(92%) contrast(101%);
+    }
+
+    .custom-button {
+        background-color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        font-size: 1rem;
+        color: #374151;
+        cursor: pointer;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .custom-button:hover {
+        border-color: #d946ef;
+    }
+
+    .custom-button:focus {
+        outline: none;
+        border-color: #d946ef;
+        box-shadow: 0 0 0 3px rgba(233, 84, 186, 0.3);
+    }
+
+    .custom-field::placeholder {
+        color: #9ca3af; /* Placeholder text color (Tailwind: text-gray-400) */
+    }
+
+    /* Specific styles for the select field to make it look like input */
+    .custom-field {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-position: right 1rem center;
+        background-repeat: no-repeat;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns="http://www.w3.org/2000/svg"%20width="10"%20height="10"%20viewBox="0%200%2010%2010"><polygon%20points="0,0%2010,0%205,5"></polygon></svg>');
+    }
+
+    /* Ensuring select looks like input, adding padding for custom arrow */
+    select.custom-field {
+    
+        padding-right: 2.5rem; /* Add space for the custom dropdown arrow */
+    }
+</style>
     <title>Tchao Tchao</title>
   </head>
   <body>
@@ -15,7 +78,7 @@
     <header>
       <div class="container">
         <div class="logo">
-         <a  href="#home" onclick="showSection('home')"> <img src="/imgs/logo.png" alt="Logo" /></a>
+         <a  href="#home" onclick="showSection('home')"> <img src="{{ asset('main/imgs/logo.png')}}" alt="Logo" /></a>
         </div>
         <div class="hamburger">
           <div class="bar"></div>
@@ -44,9 +107,9 @@
                 <h1>Partagez une location le temps</h1>
                 <p>Des économies partagées entre particuliers</p>
             </div>
-            <!-- <div class="imgWrap">
-                <img src="/imgs/hero.png" alt="hero">
-            </div> -->
+            <div class="imgWrap">
+                <img src="{{ asset('main/imgs/hero.png')}}" alt="hero">
+            </div>
         </div>
         <div class="frame">
             <div class="textWrap">
@@ -55,43 +118,43 @@
             </div>
 
             <div class="form">
-                <!-- Location Field -->
-                <div class="inputField">
-                    <div class="inputWrap">
-                        <label>Ou</label>
-                        <select class="focus:outline-none">
-                            <option value="">Sélectionnez une ville</option>
-                            @foreach($cities as $city) <!-- Assuming $cities is passed from the controller -->
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Arrival Date -->
-                    <div class="inputWrap">
-                        <label>Arrivée</label>
-                        <input type="date" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
-                    </div>
-
-                    <!-- Departure Date -->
-                    <div class="inputWrap">
-                        <label>Départ</label>
-                        <input type="date" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
-                    </div>
-
-                    <!-- Number of People -->
-                    <div class="inputWrap">
-                        <label>Personne</label>
-                        <input type="number" placeholder="Nombre de personnes" class="bg-pink-200 p-2 rounded-lg focus:outline-none" />
-                    </div>
-
-                    <!-- Search Button -->
-                    <button class="white">
-                        Rechercher
-                    </button>
-                </div>
-            </div>
+    <!-- Location Field -->
+    <div class="inputField inputWrap">
+        <!-- City Field -->
+        <div class="inputWrap">
+            <label>Ou</label>
+            <select class="custom-field">
+                <option value="">Sélectionnez une ville</option>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+            </select>
         </div>
+
+        <!-- Arrival Date -->
+        <div class="inputWrap">
+            <label>Arrivée</label>
+            <input type="date" class="custom-field" />
+        </div>
+
+        <!-- Departure Date -->
+        <div class="inputWrap">
+            <label>Départ</label>
+            <input type="date" class="custom-field" />
+        </div>
+
+        <!-- Number of People -->
+        <div class="inputWrap">
+            <label>Personne</label>
+            <input type="number" placeholder="Nombre de personnes" class="custom-field" />
+        </div>
+
+        <!-- Search Button -->
+        <button class="custom-button">
+            Rechercher
+        </button>
+    </div>
+</div>
 
         <div class="cards">
             <div class="container">
@@ -121,21 +184,21 @@
             <div class="cardHolder">
                 <div class="card">
                     <div class="imgWrap">
-                        <img src="/imgs/search.svg" alt="search">
+                        <img src="{{ asset('main/imgs/search.svg')}}" alt="search">
                         <strong class="title">Recherchez</strong>
                     </div>
                     <p>Effectuez une recherche parmi nos annonces disponibles</p>
                 </div>
                 <div class="card">
                     <div class="imgWrap">
-                        <img src="/imgs/chat.svg" alt="search">
+                        <img src="{{ asset('main/imgs/chat.svg')}}" alt="search">
                         <strong class="title">Discutez</strong>
                     </div>
                     <p>Prenez contact avec votre futur colocataire</p>
                 </div>
                 <div class="card">
                     <div class="imgWrap">
-                        <img src="/imgs/correct.svg" alt="search">
+                        <img src="{{ asset('main/imgs/correct.svg')}}" alt="search">
                         <strong class="title">Validez</strong>
                     </div>
                     <p>Conquis par l'annonce ! Réservez votre location</p>
@@ -145,24 +208,24 @@
     </div>
 
     <div class="blogs">
-        <div class="container">
-            <div class="bar"></div>
-            <h3>Les dernières annonces</h3>
-            <div class="blogWrap">
-                @foreach($rentals as $rental) <!-- Assuming $rentals is passed from the controller -->
-                    <div class="blog">
-                        <img src="{{ asset($rental->rental_property_pictures) }}" alt="card"> <!-- Adjust this path based on your storage setup -->
-                        <div class="text">
-                            <strong class="title">{{ $rental->title }}</strong> <!-- Adjust the property names based on your database -->
-                            <span>À partir de {{ $rental->price }} € / la nuit par personne</span>
-                            <span>{{ $rental->available_places }} places disponibles</span>
-                        </div>
+    <div class="container">
+        <div class="bar"></div>
+        <h3>Les dernières annonces</h3>
+        <div class="blogWrap">
+            @foreach($rentals as $rental) <!-- Assuming $rentals is passed from the controller -->
+                <div class="blog">
+                    <img src="{{ asset('main/' . $rental->rental_property_pictures) }}" alt="card" style="max-width: 100%; height: auto;"> <!-- Corrected image path -->
+                    <div class="text">
+                        <strong class="title">{{ $rental->title }}</strong> <!-- Adjust the property names based on your database -->
+                        <span>À partir de {{ $rental->price }} € / la nuit par personne</span>
+                        <span>{{ $rental->available_places }} places disponibles</span>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
-</section>
+</div>
+
 
   <div class="heroSlider">
     <div class="container">
