@@ -212,19 +212,23 @@
         <div class="bar"></div>
         <h3>Les dernières annonces</h3>
         <div class="blogWrap">
-            @foreach($rentals as $rental) <!-- Assuming $rentals is passed from the controller -->
-                <div class="blog">
-                    <img src="{{ asset('main/' . $rental->rental_property_pictures) }}" alt="card" style="max-width: 100%; height: auto;"> <!-- Corrected image path -->
-                    <div class="text">
-                        <strong class="title">{{ $rental->title }}</strong> <!-- Adjust the property names based on your database -->
-                        <span>À partir de {{ $rental->price }} € / la nuit par personne</span>
-                        <span>{{ $rental->available_places }} places disponibles</span>
-                    </div>
+            @foreach($rentals as $rental)
+                <div class="rental-item">
+                    @if($rental->rental_property_pictures)
+                        <img src="{{ asset('main/' . $rental->rental_property_pictures) }}" alt="{{ $rental->name }}" width="400" height="200">
+                    @else
+                        <p>No image available</p>
+                    @endif
+
+                    <p>From {{ $rental->each_person_price }} € / Per Person</p>
+                    
+                    <h5>{{ $rental->rental_name }}</h5>
                 </div>
             @endforeach
         </div>
     </div>
 </div>
+
 
 
   <div class="heroSlider">

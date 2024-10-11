@@ -122,7 +122,7 @@
                                     <div class="col-md-4 d-flex align-items-center">
                                         <div>
                                             <label for="rental-property-pictures" class="form-label">Rental Property Pictures</label>
-                                            <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures[]" multiple 
+                                            <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures" 
                                                 style="height: 120px; width: 300px; padding: 10px; display: block; border: 2px dashed #ced4da; background-color: #f8f9fa;">
                                         </div>
                                     </div>

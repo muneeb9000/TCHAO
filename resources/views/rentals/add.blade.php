@@ -30,6 +30,7 @@
                                     <!-- Left side: Form Fields -->
                                     <div class="col-md-8">
                                         <div class="row gy-3">
+                                            <!-- Existing Fields -->
                                             <div class="col-md-12">
                                                 <label for="rental-name" class="form-label">Rental Name</label>
                                                 <input type="text" class="form-control" id="rental-name" name="rental_name" placeholder="Enter Rental Name" required>
@@ -39,27 +40,19 @@
                                                 <select class="form-control" id="rental-category" name="rental_category" required>
                                                     <option value="">Select Category</option>
                                                     <option value="House">House</option>
-                                                    <option value="Apartment">Apartment</option>
+                                                    <option value="FarmHouse">FarmHouse</option>
                                                     <option value="Villa">Villa</option>
-                                                    <option value="Condo">Condo</option>
+                                                    <option value="Apartment">Apartment</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="city" class="form-label">Select City</label>
-                                                       <select class="form-control" id="city_id" name="city_id" required>
+                                                <select class="form-control" id="city_id" name="city_id" required>
                                                     <option value="">Select City</option>
                                                     @foreach($cities as $id => $city)
                                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="no-of-beds" class="form-label">Number of Beds</label>
-                                                <input type="number" class="form-control" id="no-of-beds" name="no_of_beds" placeholder="Enter Number of Beds" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="washroom" class="form-label">Number of Washrooms</label>
-                                                <input type="number" class="form-control" id="washroom" name="washroom" placeholder="Enter Number of Washrooms" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="each-person-price" class="form-label">Price per Person</label>
@@ -73,71 +66,106 @@
                                                 <label for="phone" class="form-label">Phone Number</label>
                                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" required>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="no-of-shares" class="form-label">Number of Shares</label>
-                                                <input type="number" class="form-control" id="no-of-shares" name="no_of_shares" placeholder="Enter Number of Shares" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="pets" class="form-label">Pets Allowed</label>
-                                                <select class="form-control" id="pets" name="pets" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="parking" class="form-label">Parking</label>
-                                                <select class="form-control" id="parking" name="parking" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="smoking" class="form-label">Smoking Allowed</label>
-                                                <select class="form-control" id="smoking" name="smoking" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="music" class="form-label">Music Allowed</label>
-                                                <select class="form-control" id="music" name="music" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-                                            </div>
                                             <div class="col-md-12">
                                                 <label for="description" class="form-label">Description</label>
                                                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a brief description"></textarea>
                                             </div>
+
+                                            <!-- New Fields -->
+                                            <div class="col-md-6">
+                                                <label for="size_in_sqm" class="form-label">Size in Square Meters</label>
+                                                <input type="number" step="0.01" class="form-control" id="size_in_sqm" name="size_in_sqm" placeholder="Enter Size in Sqm" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="max_people" class="form-label">Max People</label>
+                                                <input type="number" class="form-control" id="max_people" name="max_people" placeholder="Enter Max People" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="common_rooms" class="form-label">Common Rooms</label>
+                                                <input type="number" class="form-control" id="common_rooms" name="common_rooms" value="0">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bedrooms" class="form-label">Bedrooms</label>
+                                                <input type="number" class="form-control" id="bedrooms" name="bedrooms" value="1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bathrooms" class="form-label">Bathrooms</label>
+                                                <input type="number" class="form-control" id="bathrooms" name="bathrooms" value="1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="exterior" class="form-label">Exterior</label>
+                                                <select class="form-control" id="exterior" name="exterior" required>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <!-- Right side: Picture Upload -->
-                                    <div class="col-md-4 d-flex align-items-center">
-                                        <div>
-                                            <label for="rental-property-pictures" class="form-label">Rental Property Pictures</label>
-                                            <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures" multiple required 
+                                    <!-- Right side: Equipment Fields -->
+                                    <div class="col-md-4">
+                                        <div class="row gy-3">
+                                            <!-- Equipment -->
+                                            <div class="col-md-12">
+                                                <label for="equipment" class="form-label">Available Equipment</label><br>
+                                                @php
+                                                    $equipment = [
+                                                        'baby_bed' => 'Baby Bed',
+                                                        'double_bed' => 'Double Bed',
+                                                        'sofa_bed' => 'Sofa Bed',
+                                                        'duvets' => 'Duvets',
+                                                        'pillows' => 'Pillows',
+                                                        'sheets' => 'Sheets',
+                                                        'pillow_protectors' => 'Pillow Protectors',
+                                                        'shower' => 'Shower',
+                                                        'bath_towels' => 'Bath Towels',
+                                                        'washing_machine' => 'Washing Machine',
+                                                        'microwave' => 'Microwave',
+                                                        'hotplates' => 'Hotplates',
+                                                        'fridge' => 'Fridge',
+                                                        'freezer' => 'Freezer',
+                                                        'coffee_maker' => 'Coffee Maker',
+                                                        'tea_towels' => 'Tea Towels',
+                                                        'table' => 'Table',
+                                                        'chairs' => 'Chairs',
+                                                        'baby_high_chair' => 'Baby High Chair',
+                                                        'coffee_table' => 'Coffee Table',
+                                                        'television' => 'Television',
+                                                        'fan' => 'Fan',
+                                                        'smoke_detector' => 'Smoke Detector'
+                                                    ];
+                                                @endphp
+                                                @foreach ($equipment as $field => $label)
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="{{ $field }}" name="{{ $field }}">
+                                                        <label class="form-check-label" for="{{ $field }}">{{ $label }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Picture Upload -->
+                                            <div class="col-md-12">
+                                                <label for="rental-property-pictures" class="form-label">Rental Property Pictures</label>
+                                                <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures" 
                                                 style="height: 120px; width: 300px; padding: 10px; display: block; border: 2px dashed #ced4da; background-color: #f8f9fa;">
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 mt-3">
-                                        <button type="submit" class="btn btn-success-light m-1">Save Rental Property<i class="bi bi-download ms-2"></i></button>
+                                        <button type="submit" class="btn btn-success-light m-1">Save Rental Property</button>
                                     </div>
-                                </div>
+
+                                </div><!-- .row end -->
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--End::row-1 -->
+        </div><!-- Row End -->
+        <!-- End::row-1 -->
 
     </div>
 </div>
 <!-- End::app-content -->
-@endsection 
+@endsection
