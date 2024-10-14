@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>YNEX - Signup</title>
+    <title>TCHAO TCHAO</title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
     <link rel="icon" href="../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -26,7 +26,7 @@
         <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                 <div class="my-5 d-flex justify-content-center">
-                    <a href="index.html">
+                <a href="{{ route('home') }}">
                         <img src="{{ asset('admin/assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
                     </a>
                 </div>

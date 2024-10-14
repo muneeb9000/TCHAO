@@ -43,7 +43,7 @@
                     <div class="card-body p-5">
                         <p class="h5 fw-semibold mb-2 text-center">Sign In</p>
                         <p class="mb-4 text-muted op-7 fw-normal text-center">Welcome back Jhon!</p>
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('adminlogin') }}">
                             @csrf <!-- CSRF token for security -->
                             <div class="row gy-3">
                                 <div class="col-xl-12">

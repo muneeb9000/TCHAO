@@ -16,6 +16,12 @@ class HomeController extends Controller
         return view('welcome', compact('rentals','cities'));
     }
 
-   
+    public function cityrentals(Request $request)
+    {
+        $cityId = $request->input('city_id');
+        $rentals = Rentals::where('city_id', $cityId)->get();
+        return view('rentals', compact('rentals', 'cityId'));
+    }
+
 
 }
