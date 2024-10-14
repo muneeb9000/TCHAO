@@ -34,7 +34,7 @@
         <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
             <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
                 <div class="my-5 d-flex justify-content-center">
-                    <a href="{{ url('index.html') }}">
+                    <a href="{{ route('home') }}">
                         <img src="{{ asset('admin/assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
                         <img src="{{ asset('admin/assets/images/brand-logos/desktop-dark.png') }}" alt="logo" class="desktop-dark">
                     </a>

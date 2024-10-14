@@ -19,7 +19,7 @@ header .logo img {
   height: 48px;
 }
 header .hamburger {
-  display: none;
+  /* display: none; */
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
