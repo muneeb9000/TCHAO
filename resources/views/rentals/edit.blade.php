@@ -1,5 +1,4 @@
 @extends('layouts.customer_layout')
-
 @section('content')
 <!-- Start::app-content -->
 <div class="main-content app-content">
@@ -26,12 +25,13 @@
                     <div class="card-body add-products p-0">
                         <div class="p-4">
                             <form method="POST" action="{{ route('rentals.update', $rental->id) }}" enctype="multipart/form-data">
-                                @csrf  <!-- Include CSRF token for form security -->
-                                @method('PUT')  <!-- Method spoofing for PUT request -->
+                                @csrf
+                                @method('PUT')  <!-- Include PUT method for update -->
                                 <div class="row gy-3">
                                     <!-- Left side: Form Fields -->
                                     <div class="col-md-8">
                                         <div class="row gy-3">
+                                            <!-- Existing Fields -->
                                             <div class="col-md-12">
                                                 <label for="rental-name" class="form-label">Rental Name</label>
                                                 <input type="text" class="form-control" id="rental-name" name="rental_name" value="{{ old('rental_name', $rental->rental_name) }}" placeholder="Enter Rental Name" required>
@@ -41,18 +41,19 @@
                                                 <select class="form-control" id="rental-category" name="rental_category" required>
                                                     <option value="">Select Category</option>
                                                     <option value="House" {{ $rental->rental_category == 'House' ? 'selected' : '' }}>House</option>
-                                                    <option value="Apartment" {{ $rental->rental_category == 'Apartment' ? 'selected' : '' }}>Apartment</option>
+                                                    <option value="FarmHouse" {{ $rental->rental_category == 'FarmHouse' ? 'selected' : '' }}>FarmHouse</option>
                                                     <option value="Villa" {{ $rental->rental_category == 'Villa' ? 'selected' : '' }}>Villa</option>
-                                                    <option value="Condo" {{ $rental->rental_category == 'Condo' ? 'selected' : '' }}>Condo</option>
+                                                    <option value="Apartment" {{ $rental->rental_category == 'Apartment' ? 'selected' : '' }}>Apartment</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="no-of-beds" class="form-label">Number of Beds</label>
-                                                <input type="number" class="form-control" id="no-of-beds" name="no_of_beds" value="{{ old('no_of_beds', $rental->no_of_beds) }}" placeholder="Enter Number of Beds" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="washroom" class="form-label">Number of Washrooms</label>
-                                                <input type="number" class="form-control" id="washroom" name="washroom" value="{{ old('washroom', $rental->washroom) }}" placeholder="Enter Number of Washrooms" required>
+                                                <label for="city" class="form-label">Select City</label>
+                                                <select class="form-control" id="city_id" name="city_id" required>
+                                                    <option value="">Select City</option>
+                                                    @foreach($cities as $city)
+                                                        <option value="{{ $city->id }}" {{ $city->id == $rental->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="each-person-price" class="form-label">Price per Person</label>
@@ -63,72 +64,99 @@
                                                 <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $rental->address) }}" placeholder="Enter Address" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="city" class="form-label">Select City</label>
-                                                <select class="form-control" id="city" name="city" required>
-                                                    <option value="">Select City</option>
-                                                    @foreach($cities as $id => $city)
-                                                        <option value="{{ $id }}">{{ $city->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <label for="phone" class="form-label">Phone Number</label>
                                                 <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $rental->phone) }}" placeholder="Enter Phone Number" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="no-of-shares" class="form-label">Number of Shares</label>
-                                                <input type="number" class="form-control" id="no-of-shares" name="no_of_shares" value="{{ old('no_of_shares', $rental->no_of_shares) }}" placeholder="Enter Number of Shares" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="pets" class="form-label">Pets Allowed</label>
-                                                <select class="form-control" id="pets" name="pets" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes" {{ $rental->pets == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                    <option value="No" {{ $rental->pets == 'No' ? 'selected' : '' }}>No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="parking" class="form-label">Parking</label>
-                                                <select class="form-control" id="parking" name="parking" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes" {{ $rental->parking == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                    <option value="No" {{ $rental->parking == 'No' ? 'selected' : '' }}>No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="smoking" class="form-label">Smoking Allowed</label>
-                                                <select class="form-control" id="smoking" name="smoking" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes" {{ $rental->smoking == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                    <option value="No" {{ $rental->smoking == 'No' ? 'selected' : '' }}>No</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="music" class="form-label">Music Allowed</label>
-                                                <select class="form-control" id="music" name="music" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Yes" {{ $rental->music == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                    <option value="No" {{ $rental->music == 'No' ? 'selected' : '' }}>No</option>
-                                                </select>
                                             </div>
                                             <div class="col-md-12">
                                                 <label for="description" class="form-label">Description</label>
                                                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a brief description">{{ old('description', $rental->description) }}</textarea>
                                             </div>
+
+                                            <!-- New Fields -->
+                                            <div class="col-md-6">
+                                                <label for="size_in_sqm" class="form-label">Size in Square Meters</label>
+                                                <input type="number" step="0.01" class="form-control" id="size_in_sqm" name="size_in_sqm" value="{{ old('size_in_sqm', $rental->size_in_sqm) }}" placeholder="Enter Size in Sqm" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="max_people" class="form-label">Max People</label>
+                                                <input type="number" class="form-control" id="max_people" name="max_people" value="{{ old('max_people', $rental->max_people) }}" placeholder="Enter Max People" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="common_rooms" class="form-label">Common Rooms</label>
+                                                <input type="number" class="form-control" id="common_rooms" name="common_rooms" value="{{ old('common_rooms', $rental->common_rooms) }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bedrooms" class="form-label">Bedrooms</label>
+                                                <input type="number" class="form-control" id="bedrooms" name="bedrooms" value="{{ old('bedrooms', $rental->bedrooms) }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bathrooms" class="form-label">Bathrooms</label>
+                                                <input type="number" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms', $rental->bathrooms) }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="exterior" class="form-label">Exterior</label>
+                                                <select class="form-control" id="exterior" name="exterior" required>
+                                                    <option value="Yes" {{ $rental->exterior == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                    <option value="No" {{ $rental->exterior == 'No' ? 'selected' : '' }}>No</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <!-- Right side: Picture Upload -->
-                                    <div class="col-md-4 d-flex align-items-center">
-                                        <div>
-                                            <label for="rental-property-pictures" class="form-label">Rental Property Pictures</label>
-                                            <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures" 
-                                                style="height: 120px; width: 300px; padding: 10px; display: block; border: 2px dashed #ced4da; background-color: #f8f9fa;">
+                                    <!-- Right side: Equipment Fields -->
+                                    <div class="col-md-4">
+                                        <div class="row gy-3">
+                                            <!-- Equipment -->
+                                            <div class="col-md-12">
+                                                <label for="equipment" class="form-label">Available Equipment</label><br>
+                                                @php
+                                                    $equipment = [
+                                                        'baby_bed' => 'Baby Bed',
+                                                        'double_bed' => 'Double Bed',
+                                                        'sofa_bed' => 'Sofa Bed',
+                                                        'duvets' => 'Duvets',
+                                                        'pillows' => 'Pillows',
+                                                        'sheets' => 'Sheets',
+                                                        'pillow_protectors' => 'Pillow Protectors',
+                                                        'shower' => 'Shower',
+                                                        'bath_towels' => 'Bath Towels',
+                                                        'washing_machine' => 'Washing Machine',
+                                                        'microwave' => 'Microwave',
+                                                        'hotplates' => 'Hotplates',
+                                                        'fridge' => 'Fridge',
+                                                        'freezer' => 'Freezer',
+                                                        'coffee_maker' => 'Coffee Maker',
+                                                        'tea_towels' => 'Tea Towels',
+                                                        'table' => 'Table',
+                                                        'chairs' => 'Chairs',
+                                                        'baby_high_chair' => 'Baby High Chair',
+                                                        'coffee_table' => 'Coffee Table',
+                                                        'television' => 'Television',
+                                                        'fan' => 'Fan',
+                                                        'smoke_detector' => 'Smoke Detector'
+                                                    ];
+                                                @endphp
+                                                @foreach ($equipment as $field => $label)
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="{{ $field }}" name="{{ $field }}" {{ $rental->$field ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="{{ $field }}">{{ $label }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Picture Upload -->
+                                            <div class="col-md-12">
+                                                <label for="rental-property-pictures" class="form-label">Rental Property Pictures</label>
+                                                <input type="file" class="form-control" id="rental-property-pictures" name="rental_property_pictures">
+                                                <small class="text-muted">You can upload multiple images. Previous images will be retained unless replaced.</small>
+                                            </div>
                                         </div>
                                     </div>
-    
+
+                                    <!-- Submit Button -->
                                     <div class="col-md-12 mt-3">
-                                        <button type="submit" class="btn btn-success-light m-1">Update Rental Property<i class="bi bi-download ms-2"></i></button>
+                                        <button type="submit" class="btn btn-primary">Update Rental Property</button>
+                                        <a href="{{ route('rentals.index') }}" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </form>

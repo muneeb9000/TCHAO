@@ -15,24 +15,46 @@ class AuthController extends Controller
     {
         return view('authentication.login');
     }
+    public function showadminForm()
+    {
+        return view('authentication.adminlogin');
+    }
     public function login(Request $request)
     {
         $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            if ($user->role == 1) {
-                return redirect()->route('admin_dashboard'); 
-            } elseif ($user->role == 2) {
-                return redirect()->route('customer_dashboard'); 
-            }
+            // Authentication was successful, redirect to the intended URL
+            return redirect()->intended(); 
         }
+
         return back()->withErrors([
             'loginError' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
+    public function adminlogin(Request $request)
+    {
+        // $request->validate([
+        //     'email' => 'required|string',
+        //     'password' => 'required|string',
+        // ]);
+
+        // Attempt to authenticate the user
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Authentication was successful, redirect to a specific route
+            return redirect()->route('admin_dashboard'); // Change 'dashboard' to your desired route
+        }
+
+        // If authentication fails, redirect back with an error message
+        return back()->withErrors([
+            'loginError' => 'The provided credentials do not match our records.',
+        ])->withInput();
+    }
+
+
     public function logout()
     {
         Auth::logout();
