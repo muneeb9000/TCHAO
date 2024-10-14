@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- slick links -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick.css')}}" />
-  <link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick-theme.css')}}" />
-    <link rel="stylesheet" href="{{ asset('main/css/styles.css')}}" />
-    <style>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- slick links -->
+<link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('main/css/slick/slick-theme.css')}}" />
+<link rel="stylesheet" href="{{ asset('main/css/styles.css')}}" />
+<title>Tchao Tchao</title>
+<style>
     .custom-field {
         
         padding: 0.5rem; /* Tailwind: p-2 */
@@ -71,36 +72,60 @@
         padding-right: 2.5rem; /* Add space for the custom dropdown arrow */
     }
 </style>
-    <title>Tchao Tchao</title>
-  </head>
-  <body>
+ </head>
+    <body>
+
     <!-- header start -->
     <header>
       <div class="container">
         <div class="logo">
-         <a  href="#home" onclick="showSection('home')"> <img src="{{ asset('main/imgs/logo.png')}}" alt="Logo" /></a>
+         <a  href="{{ route('home')}}" onclick="showSection('home')"> <img src="{{ asset('main/imgs/logo.png')}}" alt="Logo" /></a>
         </div>
         <div class="hamburger">
           <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+            <div class="bar"></div>
+              <div class="bar"></div>
         </div>
         <nav>
-          <ul class="nav-links">
-            <li class="nav-item"><a href="#registration" onclick="showSection('contact')"><button class="secondary">Envie de proposer</button></a></li>
-            <li class="nav-item"><a href="#login" onclick="showSection('contacts')"><button class="btn ">Besoin de rechercher</button></a></li>
-            <li class="nav-item"><a href="#home"  onclick="showSection('home')">Home</a></li>
-            <li class="nav-item"><a href="#howitswork"  onclick="showSection('howitswork')">How Its Work</a></li>
-            <li class="nav-item"><a href="#registration"  onclick="showSection('contact')">Registration</a></li>
-            <li class="nav-item"><a href="#login"  onclick="showSection('contacts')">Login</a></li>
-            
-          </ul>
+        <ul class="nav-links">
+    <li class="nav-item">
+        <a href="{{ route('rentals.create') }}" onclick="showSection('contact')">
+            <button class="secondary">Envie de proposer</button>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('home') }}" onclick="showSection('contacts')">
+            <button class="btn">Besoin de rechercher</button>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('home') }}" onclick="showSection('home')">Home</a>
+    </li>
+    <li class="nav-item">
+        <a href="#howitswork" onclick="showSection('howitswork')">How It Works</a>
+    </li>
+
+    @if (Auth::check())
+        <!-- Display the username as a link to the dashboard for authenticated users -->
+        <li class="nav-item">
+            <a href="{{ route('customer_dashboard') }}">{{ Auth::user()->name }}</a>
+        </li>
+    @else
+        <!-- Display Registration and Login for guests -->
+        <li class="nav-item">
+            <a href="{{ route('showregister') }}" onclick="showSection('contact')">Registration</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('showlogin') }}" onclick="showSection('contacts')">Login</a>
+        </li>
+    @endif
+</ul>
+
         </nav>
       </div>
     </header>
      <!-- header end -->
-      <!-- home start -->
-<section id="home" class="home section">
+     <section id="home" class="home section">
     <div class="container">
         <div class="heroWrap">
             <div class="textWrap">
@@ -116,17 +141,15 @@
                 <h3>Trouvez maintenant !</h3>
                 <button class="secondary">Je suis flexible</button>
             </div>
-
             <div class="form">
-    <!-- Location Field -->
     <div class="inputField inputWrap">
         <!-- City Field -->
         <div class="inputWrap">
             <label>Ou</label>
-            <select class="custom-field">
+            <select class="custom-field" id="city-select">
                 <option value="">Sélectionnez une ville</option>
                 @foreach($cities as $city)
-                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    <option value="{{ $city->id }}">{{ $city->name }}</option> <!-- Access the city ID here -->
                 @endforeach
             </select>
         </div>
@@ -134,27 +157,30 @@
         <!-- Arrival Date -->
         <div class="inputWrap">
             <label>Arrivée</label>
-            <input type="date" class="custom-field" />
+            <input type="date" class="custom-field" id="arrival-date" />
         </div>
 
         <!-- Departure Date -->
         <div class="inputWrap">
             <label>Départ</label>
-            <input type="date" class="custom-field" />
+            <input type="date" class="custom-field" id="departure-date" />
         </div>
 
         <!-- Number of People -->
         <div class="inputWrap">
             <label>Personne</label>
-            <input type="number" placeholder="Nombre de personnes" class="custom-field" />
+            <input type="number" placeholder="Nombre de personnes" class="custom-field" id="num-people" />
         </div>
 
         <!-- Search Button -->
-        <button class="custom-button">
-            Rechercher
-        </button>
+        <button class="custom-button" id="search-button">Rechercher</button>
     </div>
 </div>
+
+
+
+
+
 
         <div class="cards">
             <div class="container">
@@ -210,19 +236,19 @@
     <div class="blogs">
     <div class="container">
         <div class="bar"></div>
-        <h3>Les dernières annonces</h3>
-        <div class="blogWrap">
+        <h3 style="margin-top: 50px;">Les dernières annonces</h3> <!-- Added 50px top margin -->
+        <div class="blogWrap" style="display: flex; flex-wrap: wrap; gap: 20px;">
             @foreach($rentals as $rental)
-                <div class="rental-item">
-                    @if($rental->rental_property_pictures)
-                        <img src="{{ asset('main/' . $rental->rental_property_pictures) }}" alt="{{ $rental->name }}" width="400" height="200">
-                    @else
-                        <p>No image available</p>
-                    @endif
-
-                    <p>From {{ $rental->each_person_price }} € / Per Person</p>
-                    
-                    <h5>{{ $rental->rental_name }}</h5>
+                <div class="rental-item" style="flex: 1 1 calc(33.33% - 20px); margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
+                    <a href="{{ route('rentals.show', $rental->id) }}" style="text-decoration: none; color: inherit;">
+                        @if($rental->rental_property_pictures)
+                            <img src="{{ asset('images/rentals/' . $rental->rental_property_pictures) }}" alt="{{ $rental->rental_name }}" style="width: 100%; height: 200px; object-fit: cover;"> <!-- Maintain aspect ratio -->
+                        @else
+                            <p>No image available</p>
+                        @endif
+                        <p>From {{ $rental->each_person_price }} € / Per Person</p>
+                        <h5>{{ $rental->rental_name }}</h5>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -270,8 +296,7 @@
     </div>
   </div>
 </div>
-    </section>
-      <!-- home end -->
+</section>
       <!-- how its wrok start -->
        <section id="howitswork" class="howitswork section">
         <div class="container">
@@ -305,72 +330,8 @@
         </div>
        </section>
       <!-- how its work end -->
-         <!-- registration start -->
-         <section id="registration" class="registration section">
-          <div class="container">
-            <form id="registrationForm">
-              <h1>Registration</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur</p>
-              <div class="bar"></div>
-              <div class="inputWrap">
-                <div class="field">
-                  <label for="firstName">First Name</label>
-                  <input type="text" id="firstName" name="firstName">
-                  <span class="error" id="firstNameError"></span>
-                </div>
-                <div class="field">
-                  <label for="lastName">Last Name</label>
-                  <input type="text" id="lastName" name="lastName">
-                  <span class="error" id="lastNameError"></span>
-                </div>
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="regEmail" name="email">
-                <span class="error" id="emailError"></span>
-              </div>
-              <div class="field">
-                <label for="phone">Phone No</label>
-                <input type="number" id="phone" name="phone">
-                <span class="error" id="phoneError"></span>
-              </div>
-              <div class="field">
-                <label for="password">Password</label>
-                <input type="password" id="regPassword" name="password">
-                <span class="error" id="passwordError"></span>
-              </div>
-              <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, at.</span>
-              <button class="btn" type="submit">Submit</button>
-            </form>
-          </div>
-        </section>
-        <!-- registration end-->
-        
-        <!-- login start -->
-        <section id="login" class="login section">
-          <div class="container">
-            <form id="loginForm">
-              <h1>Login</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur</p>
-              <div class="bar"></div>
-              <div class="field">
-                <label for="loginEmail">Email</label>
-                <input type="email" id="loginEmail" name="loginEmail">
-              </div>
-              <div class="field">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" name="loginPassword">
-              </div>
-              <div class="checkbox">
-                <input type="checkbox" checked>
-                <label>Lorem, ipsum dolor.</label>
-              </div>
-              <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, at.</span>
-              <button class="btn">Submit</button>
-            </form>
-          </div>
-        </section>
-       <!-- login end -->
+       
+       
        <!-- faq start -->
        <section id="faq" class="faq section">
         <div class="container">
@@ -521,7 +482,7 @@
           <div class="underline"></div>
           <ul>
             <li><a href="mailto:contact@tchaotchao.fr">N'hésitez pas à nous écrire à contact@tchaotchao.fr</a></li>
-            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="{{ route('home')}}" onclick="showSection('home')">Home</a></li>
             <li><a href="#howitswork" onclick="showSection('howitswork')">How its Work</a></li>
          
             <li><a href="#faq"  onclick="showSection('faq')">FAQ</a></li>
@@ -560,3 +521,16 @@
     <script src="{{ asset('main/js/script.js')}}"></script>
   </body>
 </html>
+<script>
+    document.getElementById('search-button').onclick = function() {
+        var cityId = document.getElementById('city-select').value; // Get selected city ID
+
+        // Redirect only with the city ID
+        if (cityId) {
+            var url = "{{ route('cityrentals', ['city_id' => '']) }}" + cityId;
+            window.location.href = url; // Redirect to the constructed URL
+        } else {
+            alert('Please select a city.');
+        }
+    };
+</script>
