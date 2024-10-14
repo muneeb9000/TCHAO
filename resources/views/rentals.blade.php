@@ -78,7 +78,7 @@
     <!-- header start -->
     <header>
       <div class="container">
-        <div class="logo">
+      <div class="logo">
          <a  href="{{ route('home')}}" onclick="showSection('home')"> <img src="{{ asset('main/imgs/logo.png')}}" alt="Logo" /></a>
         </div>
         <div class="hamburger">
@@ -125,124 +125,17 @@
       </div>
     </header>
      <!-- header end -->
-     <section id="home" class="home section">
-    <div class="container">
-        <div class="heroWrap">
-            <div class="textWrap">
-                <h1>Partagez une location le temps</h1>
-                <p>Des économies partagées entre particuliers</p>
-            </div>
-            <div class="imgWrap">
-                <img src="{{ asset('main/imgs/hero.png')}}" alt="hero">
-            </div>
-        </div>
-        <div class="frame">
-            <div class="textWrap">
-                <h3>Trouvez maintenant !</h3>
-                <button class="secondary">Je suis flexible</button>
-            </div>
-            <div class="form">
-    <div class="inputField inputWrap">
-        <!-- City Field -->
-        <div class="inputWrap">
-            <label>Ou</label>
-            <select class="custom-field" id="city-select">
-                <option value="">Sélectionnez une ville</option>
-                @foreach($cities as $city)
-                    <option value="{{ $city->id }}">{{ $city->name }}</option> <!-- Access the city ID here -->
-                @endforeach
-            </select>
-        </div>
-
-        <!-- Arrival Date -->
-        <div class="inputWrap">
-            <label>Arrivée</label>
-            <input type="date" class="custom-field" id="arrival-date" />
-        </div>
-
-        <!-- Departure Date -->
-        <div class="inputWrap">
-            <label>Départ</label>
-            <input type="date" class="custom-field" id="departure-date" />
-        </div>
-
-        <!-- Number of People -->
-        <div class="inputWrap">
-            <label>Personne</label>
-            <input type="number" placeholder="Nombre de personnes" class="custom-field" id="num-people" />
-        </div>
-
-        <!-- Search Button -->
-        <button class="custom-button" id="search-button">Rechercher</button>
-    </div>
-</div>
-
-
-
-
-
-
-        <div class="cards">
-            <div class="container">
-                <div class="card">
-                    <strong class="title">Rapide</strong>
-                    <div class="bar"></div>
-                    <p>Simple et rapide, en fonction d'un lieu, d'une date, choisissez votre location partagée et réservez là !</p>
-                </div>
-                <div class="card">
-                    <strong class="title">Économique</strong>
-                    <div class="bar"></div>
-                    <p>-50%, -60%, -70%... d'économie partagée pour mieux profiter de votre séjour</p>
-                </div>
-                <div class="card">
-                    <strong class="title">Collaboratif</strong>
-                    <div class="bar"></div>
-                    <p>Les profils sont validés par notre équipe et la communauté. Vous savez ainsi avec qui vous allez cohabiter.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="comment">
-        <div class="container">
-            <div class="bar"></div>
-            <h3>Comment trouver votre location à partager ?</h3>
-            <div class="cardHolder">
-                <div class="card">
-                    <div class="imgWrap">
-                        <img src="{{ asset('main/imgs/search.svg')}}" alt="search">
-                        <strong class="title">Recherchez</strong>
-                    </div>
-                    <p>Effectuez une recherche parmi nos annonces disponibles</p>
-                </div>
-                <div class="card">
-                    <div class="imgWrap">
-                        <img src="{{ asset('main/imgs/chat.svg')}}" alt="search">
-                        <strong class="title">Discutez</strong>
-                    </div>
-                    <p>Prenez contact avec votre futur colocataire</p>
-                </div>
-                <div class="card">
-                    <div class="imgWrap">
-                        <img src="{{ asset('main/imgs/correct.svg')}}" alt="search">
-                        <strong class="title">Validez</strong>
-                    </div>
-                    <p>Conquis par l'annonce ! Réservez votre location</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="blogs">
+     
+     <div class="blogs">
     <div class="container">
         <div class="bar"></div>
-        <h3 style="margin-top: 50px;">Les dernières annonces</h3> <!-- Added 50px top margin -->
+        <h3 style="margin: 150px 0 20px; color: #374151;">Les dernières Annonces</h3> <!-- Added 50px top margin -->
         <div class="blogWrap" style="display: flex; flex-wrap: wrap; gap: 20px;">
             @foreach($rentals as $rental)
                 <div class="rental-item" style="flex: 1 1 calc(33.33% - 20px); margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
                     <a href="{{ route('rentals.show', $rental->id) }}" style="text-decoration: none; color: inherit;">
                         @if($rental->rental_property_pictures)
-                            <img src="{{ asset('images/rentals/' . $rental->rental_property_pictures) }}" alt="{{ $rental->rental_name }}" style="width: 100%; height: 200px; object-fit: cover;"> <!-- Maintain aspect ratio -->
+                            <img src="{{ asset('images/rentals/' . $rental->rental_property_pictures) }}" alt="{{ $rental->rental_name }}" style="width: 100%; height: 200px; object-fit: cover;">
                         @else
                             <p>No image available</p>
                         @endif
@@ -256,47 +149,6 @@
 </div>
 
 
-
-  <div class="heroSlider">
-    <div class="container">
-      <div class="bar"></div>
-      <h3>Quelques retours d'expériences...</h3>
-      <div class="sliders">
-        <div class="slides">
-          <strong class="title">« Nous te remercions Michel !!! »</strong>
-          <p>L'appartement est très agréable, bien rénové et bien situé à proximité des commerces et de la plage. Arrêt du bus proche pour se rendre au cœur de Saint Malo. Possibilité de s'y rendre à pied par le remblais, belle promenade.</p>
-          <span>
-            Martine </span>
-        </div>
-        <div class="slides">
-          <strong class="title">« Nous te remercions Michel !!! »</strong>
-          <p>L'appartement est très agréable, bien rénové et bien situé à proximité des commerces et de la plage. Arrêt du bus proche pour se rendre au cœur de Saint Malo. Possibilité de s'y rendre à pied par le remblais, belle promenade.</p>
-          <span>
-            Martine </span>
-        </div>
-        <div class="slides">
-          <strong class="title">« Nous te remercions Michel !!! »</strong>
-          <p>L'appartement est très agréable, bien rénové et bien situé à proximité des commerces et de la plage. Arrêt du bus proche pour se rendre au cœur de Saint Malo. Possibilité de s'y rendre à pied par le remblais, belle promenade.</p>
-          <span>
-            Martine </span>
-        </div>
-        <div class="slides">
-          <strong class="title">« Nous te remercions Michel !!! »</strong>
-          <p>L'appartement est très agréable, bien rénové et bien situé à proximité des commerces et de la plage. Arrêt du bus proche pour se rendre au cœur de Saint Malo. Possibilité de s'y rendre à pied par le remblais, belle promenade.</p>
-          <span>
-            Martine </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="btnDiv">
-    <div class="container">
-      <h3>Vous serez surpris !</h3>
-      <button class="btn">Essayez dès maintenant !</button>
-    </div>
-  </div>
-</div>
-</section>
       <!-- how its wrok start -->
        <section id="howitswork" class="howitswork section">
         <div class="container">
@@ -521,16 +373,3 @@
     <script src="{{ asset('main/js/script.js')}}"></script>
   </body>
 </html>
-<script>
-    document.getElementById('search-button').onclick = function() {
-        var cityId = document.getElementById('city-select').value; // Get selected city ID
-
-        // Redirect only with the city ID
-        if (cityId) {
-            var url = "{{ route('cityrentals', ['city_id' => '']) }}" + cityId;
-            window.location.href = url; // Redirect to the constructed URL
-        } else {
-            alert('Please select a city.');
-        }
-    };
-</script>
